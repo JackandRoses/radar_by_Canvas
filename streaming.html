@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <style type="text/css">
+      body {
+        text-align: center;
+        min-width: 500px;
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script>
+      function log(m) {
+        d = document.getElementById("log");
+        d.innerHTML = m + "<br/>" + d.innerHTML;
+      }
+ 
+      $(document).ready(function () {
+        var ws = new WebSocket("ws://localhost:8888/streaming");
+        ws.onopen = function(evt) { log("socket opened"); };
+        ws.onmessage = function(evt) { log("message: " + evt.data); };
+        ws.onclose = function(evt) { log("socket closed"); };
+      });
+ 
+    </script>
+  </head>
+ 
+  <body>
+    <h1>Websockets Streaming</h1>
+    <div id="log"></div>
+  </body>
+</html>
